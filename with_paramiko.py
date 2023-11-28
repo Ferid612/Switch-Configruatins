@@ -2,11 +2,12 @@ from datetime import datetime
 import paramiko
 import time
 
+from input import get_key
+
 # Function to execute commands on the switch
 
 
 def connect_to_switch(ip_address, username="admin", password="!n\/esT@"):
-    
     ssh_client = paramiko.SSHClient()
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh_client.connect(hostname=ip_address, username=username, password=password, timeout=5)
@@ -102,8 +103,20 @@ def start_self_input_precedure(remote_shell, ip_address):
 def start_backup_process():
     ip_addresses = ["172.16.81.1", "172.16.52.1"]
     for ip_address in ip_addresses:
-        collect_current_conf_data(ip_address)
-
+        # collect_current_conf_data(ip_address)
+        pass
+    
+    print("\n Hey, backup process is finished. \n Do you want to continue playing? Y\\N: ", end=" ")
+    # key = input()
+    key = get_key()
+    print()
+    if key in "Yy":
+        ip_address = input("IP: ")
+        ssh_client, remote_shell = connect_to_switch(ip_address)
+        start_self_input_precedure(remote_shell, ip_address)          
+    else:
+        print("Good bye")
+    
 start_backup_process()
     
     
