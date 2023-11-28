@@ -49,7 +49,7 @@ for ip_address in ip_addresses:
         # output = ssh_connection.send_command('display arp')  # Execute a command (e.g., show version)
         # ssh_connection.enable()  # Enter privileged exec mode if required
         # output = ssh_connection.send_command('sys', read_timeout=20, cmd_verify=False)  # Execute a command (e.g., show version)
-        with open(f"swith_{ip_address}", 'w') as file:
+        with open(f"swith_{ip_address}.txt", 'w') as file:
             file.write(output)
             
         print(output)  # Print the command output

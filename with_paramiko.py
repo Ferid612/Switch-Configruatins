@@ -45,9 +45,8 @@ def collect_current_conf_data(ip_address):
             all_text += "\n" + output + "\n"        
             if ">" in output:
                 break    
-        
-        with open(f"hp_swith_{ip_address}.txt", "w") as file:
-            file.writelines(all_text)
+            
+        write_to_text(ip_address, all_text)
 
 
     except paramiko.AuthenticationException:
@@ -56,6 +55,14 @@ def collect_current_conf_data(ip_address):
         print(f"SSH connection failed for {ip_address}: {ssh_err}")
     finally:
         ssh_client.close()
+
+
+
+def write_to_text(ip_address, all_text):
+    current_time = datetime.now().strftime("%Y-%m-%d_%H-%M")
+    file_name = f"with_paramiko/hp_{ip_address}_{current_time}.txt"
+    with open(file_name, "w") as file:
+        file.writelines(all_text)
 
 
 
@@ -77,11 +84,8 @@ def start_self_input_precedure(remote_shell, ip_address):
     while True:
         command = input("command: ")
         if command == "write_to_txt":
-            current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-            file_name = f"hp_switch_{ip_address}_{current_time}.txt"
-            with open(f"hp_swith_{ip_address}.txt","w") as file:
-                file.writelines(all_text)
-            
+            write_to_text(all_text=all_text, ip_address=ip_address)
+
 
         output = send_command_to_switch(remote_shell, command = command)
         all_text = ""
