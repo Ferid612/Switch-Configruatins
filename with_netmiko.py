@@ -1,14 +1,18 @@
-from datetime import datetime
-import os
 import time
-from netmiko import ConnectHandler, NetmikoTimeoutException
+from netmiko import ConnectHandler
+from services import write_to_text, current_time
 
-def connect_to_switch(ip_address, username = "admin", password = "!n\/esT@"):
+
+
+def connect_to_switch(ip_address, username = "admin", password = "!n\/esT@", model="hp"):
+    device_type = 'hp_comware_telnet' if model == "hp" else "cisco_ios_telnet"
     switch = {
-        'device_type': 'hp_comware_telnet',
+        'device_type': device_type,
         'host': ip_address,
         'username': username,
         'password': password,
+        'secret': password  # If enable password is required
+        
     }
     connection = ConnectHandler(**switch)
     print(f"Connected to {ip_address}")
@@ -43,8 +47,8 @@ def send_command_to_switch(connection, command = None, sleep_time = 1 ):
         
         
 
-def start_backup_procedure(ip_address, password = '!n\/esT@'):
-    connection = connect_to_switch(ip_address, password = password)
+def start_hp_backup_procedure(ip_address, password = '!n\/esT@'):
+    connection = connect_to_switch(ip_address, password = password, model="hp")
 
     login_to_switch(connection) 
 
@@ -67,11 +71,28 @@ def start_backup_procedure(ip_address, password = '!n\/esT@'):
     connection.disconnect()  # Disconnect from the device
 
 
+
+def start_cisco_backup_procedure(ip_address, password = '!n\/esT@'):
+ 
+    try:
+
+        connection = connect_to_switch(ip_address, password = password, model = "cisco")
+        connection.enable()  # Enter privileged exec mode if required
+        output = connection.send_command('show run')  # Execute a command (e.g., show version)
+        write_to_text(ip_address,all_text = output, model = "cisco") 
+        
+            
+        # print(output)  # Print the command output
+        connection.disconnect()  # Disconnect from the device
+    
+    except Exception as e:
+        print(f"Error: {str(e)}")
     
     
-def backup_switches(ip_addresses):
+def backup_switches(ip_addresses, model = "hp"):
     error_ips = []
     count = 0
+    start_backup_procedure = start_hp_backup_procedure if model == "hp" else start_cisco_backup_procedure
     for ip_address in ip_addresses:
         count += 1 
         print(f"============== {count}/ {len(ip_addresses)} ==============")
@@ -103,38 +124,15 @@ def backup_switches(ip_addresses):
 
 
 
-def create_folder(folder_name):
-    if not os.path.exists(folder_name):
-        os.makedirs(folder_name)
-        print(f"Folder '{folder_name}' created successfully.")
-    else:
-        print(f"Folder '{folder_name}' already exists.")
-
-
-def write_to_text(ip_address, all_text):
-    file_name = f"{folder_name}/hp_{ip_address}_{current_time}.txt"
-    with open(file_name, "w") as file:
-        file.writelines(all_text)
-                
-             
-
-
 
 # ip_addresses = ["172.16.52.1"]
 # cisco_ip_addresses = ["172.16.73.1","172.16.70.1","172.16.70.222","172.16.70.14","172.16.77.1","172.16.77.12","172.16.47.1","172.16.78.1","172.16.92.1","172.16.91.1","172.16.97.1","172.16.93.1","172.16.93.210","172.16.99.1","172.16.99.100","172.16.80.1","172.16.32.1","172.16.55.1","172.16.90.1","172.16.90.70","172.16.90.150","172.16.90.217","172.16.90.67","172.16.90.36","172.16.90.69","172.16.31.1","172.16.60.1","172.16.60.135","172.16.60.30","172.16.60.160","172.16.72.1","172.16.75.1","172.16.73.1","172.16.46.1"]
 # hp_ip_addresses = ["172.16.81.1","172.16.82.1","172.16.44.1","172.16.42.1","172.16.41.1","172.16.43.1","172.16.40.1","172.16.70.116","172.16.70.180","172.16.70.240","172.16.30.1","172.16.30.76","172.16.30.100","172.16.90.223","172.16.96.1","172.16.95.1","172.16.54.1","172.16.94.1","172.16.53.1","172.16.53.202","172.16.71.1","172.16.50.1","172.16.52.1","172.16.51.1","172.16.74.1","10.3.22.6 "]
 # switches_without_telnet = ["172.16.41.1", "172.16.40.1", "172.16.70.180", "172.16.30.1", "172.16.90.223"]
 # error_hp_ip_addresses = [ "172.16.74.1", "10.3.22.6"]
-error_hp_ip_addresses = ["172.16.71.1"]
-
-
-
-
+error_hp_ip_addresses = ["172.16.81.1","172.16.82.1"]
+error_cisco_ip_addresses = ["172.16.73.1","172.16.70.1"]
 
    
-current_time = datetime.now().strftime("%Y-%m-%d_%H-%M")
-create_folder("with_netmiko")
-folder_name = f"with_netmiko/{current_time}"
-create_folder(folder_name)
-
-backup_switches(error_hp_ip_addresses)
+backup_switches(error_hp_ip_addresses, model="hp")
+backup_switches(error_cisco_ip_addresses, model="cisco")
