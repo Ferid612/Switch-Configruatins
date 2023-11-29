@@ -4,29 +4,19 @@ from services import write_to_text, current_time
 
 
 
-def connect_to_switch(ip_address, username = "admin", password = "!n\/esT@"):
-
-    # device_type = 'hp_comware_telnet' if model == "hp" else "cisco_ios_telnet"
-    device_type = 'hp_comware_telnet'
+def connect_to_switch(ip_address, username = "admin", password = "!n\/esT@", model="hp"):
+    device_type = 'hp_comware_telnet' if model == "hp" else "cisco_ios_telnet"
     switch = {
         'device_type': device_type,
         'host': ip_address,
         'username': username,
         'password': password,
-        'secret': password  
+        'secret': password  # If enable password is required
+        
     }
+    connection = ConnectHandler(**switch)
+    print(f"Connected to {ip_address}")
     
-    try:
-        connection = ConnectHandler(**switch)
-        print(f"Connected to {ip_address}")
-    except:
-        switch['device_type'] = "cisco_ios_telnet"
-        connection = ConnectHandler(**switch)
-        connection.enable()  # Enter privileged exec mode if required
-        
-        print(f"Connected to {ip_address}")
-        
-        
     return connection
 
 
@@ -58,7 +48,7 @@ def send_command_to_switch(connection, command = None, sleep_time = 1 ):
         
 
 def start_hp_backup_procedure(ip_address, password = '!n\/esT@'):
-    connection = connect_to_switch(ip_address, password = password)
+    connection = connect_to_switch(ip_address, password = password, model="hp")
 
     login_to_switch(connection) 
 
@@ -86,7 +76,8 @@ def start_cisco_backup_procedure(ip_address, password = '!n\/esT@'):
  
     try:
 
-        connection = connect_to_switch(ip_address, password = password)
+        connection = connect_to_switch(ip_address, password = password, model = "cisco")
+        connection.enable()  # Enter privileged exec mode if required
         output = connection.send_command('show run')  # Execute a command (e.g., show version)
         write_to_text(ip_address,all_text = output, model = "cisco") 
         
@@ -112,17 +103,13 @@ def backup_switches(ip_addresses, model = "hp"):
             try:
                 try_again_count = 1
                 start_backup_procedure(ip_address, password="AssKlim{}+#$")
-            except Exception as e:
-                print(f"Error: {str(e)}")
-
+            except:
                 try:
                     try_again_count+=1
                     start_backup_procedure(ip_address, password="Switch")
-                except Exception as e:
-                    print(f"Error: {str(e)}")
+                except:
                     try_again_count+=1
                     pass
-
             if try_again_count == 3:
                 error_ips.append(ip_address)
                 print(f"Error: {str(e)}")
@@ -138,12 +125,14 @@ def backup_switches(ip_addresses, model = "hp"):
 
 
 
+# ip_addresses = ["172.16.52.1"]
 # cisco_ip_addresses = ["172.16.73.1","172.16.70.1","172.16.70.222","172.16.70.14","172.16.77.1","172.16.77.12","172.16.47.1","172.16.78.1","172.16.92.1","172.16.91.1","172.16.97.1","172.16.93.1","172.16.93.210","172.16.99.1","172.16.99.100","172.16.80.1","172.16.32.1","172.16.55.1","172.16.90.1","172.16.90.70","172.16.90.150","172.16.90.217","172.16.90.67","172.16.90.36","172.16.90.69","172.16.31.1","172.16.60.1","172.16.60.135","172.16.60.30","172.16.60.160","172.16.72.1","172.16.75.1","172.16.73.1","172.16.46.1"]
 # hp_ip_addresses = ["172.16.81.1","172.16.82.1","172.16.44.1","172.16.42.1","172.16.41.1","172.16.43.1","172.16.40.1","172.16.70.116","172.16.70.180","172.16.70.240","172.16.30.1","172.16.30.76","172.16.30.100","172.16.90.223","172.16.96.1","172.16.95.1","172.16.54.1","172.16.94.1","172.16.53.1","172.16.53.202","172.16.71.1","172.16.50.1","172.16.52.1","172.16.51.1","172.16.74.1","10.3.22.6 "]
+# switches_without_telnet = ["172.16.41.1", "172.16.40.1", "172.16.70.180", "172.16.30.1", "172.16.90.223"]
+# error_hp_ip_addresses = [ "172.16.74.1", "10.3.22.6"]
+error_hp_ip_addresses = ["172.16.81.1","172.16.82.1"]
+error_cisco_ip_addresses = ["172.16.73.1","172.16.70.1"]
 
    
-hp_ip_addresses = ["172.16.81.1"]
-cisco_ip_addresses = ["172.16.73.1"]
-
-# backup_switches(hp_ip_addresses, model="hp")
-backup_switches(cisco_ip_addresses, model="cisco")
+backup_switches(error_hp_ip_addresses, model="hp")
+backup_switches(error_cisco_ip_addresses, model="cisco")

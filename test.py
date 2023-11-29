@@ -1,18 +1,28 @@
 from instabot import Bot
-bot = Bot()
+
 
 import os 
 import glob
+usernames = { 
+    "semrakazimli": "amelliparol",
+    "kataloqlar": "emelliparol"
+}
 
-try:
-    cookie_del = glob.glob("config/*cookie.json")
-    os.remove(cookie_del[0])
-except:
-    pass 
+for username, password in usernames.items() :
+    try:
+        bot = Bot()
 
-bot.login(username="semrakazimli", password="amelliparol")
+        try:
+            cookie_del = glob.glob("config/*cookie.json")
+            os.remove(cookie_del[0])
+        except:
+            pass 
 
-bot.upload_photo("kataloqlar-20231129-0001.webp",caption="DaliDaliDali Saiba ")
+        bot.login(username=username, password=password)
+
+        bot.upload_photo("kataloqlar-20231129-0001.webp",caption="DaliDaliDali Saiba ")
+    except:
+        pass
 #my_followers = bot.followers
 
 # with open("result.html","w") as write:
