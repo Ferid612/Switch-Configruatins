@@ -5,6 +5,7 @@ from netmiko import ConnectHandler, NetmikoTimeoutException
 
 
 def backup_switches(ip_addresses):
+    error_ips = []
     for ip_address in ip_addresses:
     # Define the device information
         switch = {
@@ -46,11 +47,15 @@ def backup_switches(ip_addresses):
 
     
         except Exception as e:
+            error_ips.append(ip_address)
             print(f"Error: {str(e)}")
 
 
-
-
+    current_time = datetime.now().strftime("%Y-%m-%d_%H-%M")
+    file_name = f"with_netmiko/error_hp_switches_{current_time}.txt"
+    with open(file_name, "w") as file:
+        file.writelines(", ".join(error_ips))
+        
 
 def send_show_command(device_params, command):
     with ConnectHandler(**device_params) as ssh:

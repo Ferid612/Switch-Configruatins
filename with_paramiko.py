@@ -103,7 +103,7 @@ def start_self_input_precedure(remote_shell, ip_address):
 def start_backup_process():
     ip_addresses = ["172.16.81.1", "172.16.52.1"]
     for ip_address in ip_addresses:
-        # collect_current_conf_data(ip_address)
+        collect_current_conf_data(ip_address)
         pass
     
     print("\n Hey, backup process is finished. \n Do you want to continue playing? Y\\N: ", end=" ")
