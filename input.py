@@ -1,5 +1,5 @@
 import tty
-import sys
+import sys      #elkhan deyisikliyi
 import termios
 
 def get_key():
