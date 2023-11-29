@@ -130,6 +130,7 @@ error_hp_ip_addresses = [ "172.16.74.1", "10.3.22.6"]
 
    
 current_time = datetime.now().strftime("%Y-%m-%d_%H-%M")
+create_folder("with_netmiko")
 folder_name = f"with_netmiko/{current_time}"
 create_folder(folder_name)
 
