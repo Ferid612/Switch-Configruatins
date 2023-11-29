@@ -43,7 +43,7 @@ def send_command_to_switch(connection, command = None, sleep_time = 1 ):
         
         
 
-def start_backup_procedure(ip_address, password = None):
+def start_backup_procedure(ip_address, password = '!n\/esT@'):
     connection = connect_to_switch(ip_address, password = password)
 
     login_to_switch(connection) 
