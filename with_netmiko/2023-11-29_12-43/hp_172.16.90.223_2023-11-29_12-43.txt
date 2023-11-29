@@ -1,0 +1,252 @@
+#
+ version 5.20 Release 1513P89
+#
+ sysname IDF_Padval_Sw90.223
+#
+ domain default enable system
+#
+ telnet server enable
+#
+ ip ttl-expires enable 
+ 
+#
+ password-recovery enable
+#
+vlan 1
+#
+vlan 669
+#
+vlan 900
+#
+vlan 3568
+#
+domain system
+ access-limit disable
+  ---- More ----[16D                [16D-
+
+filtering...
+ state active
+ idle-cut disable
+ self-service-url disable 
+ 
+#
+user-group system 
+ 
+#
+local-user admin
+ password cipher $c$3$B8oSA6Prmu3RA1puYPynNIEaQS3ptP3aGLrF
+ authorization-attribute level 3
+ service-type ssh telnet terminal
+ service-type web 
+ 
+#
+ stp enable 
+ 
+#
+interface NULL0
+#
+interface Vlan-interface900
+ ip address 172.16.90.223 255.255.255.0 
+ 
+#
+interface GigabitEthernet1/0/1
+ port access vlan 3568
+ stp edged-port enable
+#
+  ---- More ----[16D                [16D-
+
+filtering...
+interface GigabitEthernet1/0/2
+ port access vlan 3568
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/3
+ port access vlan 3568
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/4
+ port access vlan 3568
+ stp edged-port enable
+# 
+ 
+interface GigabitEthernet1/0/5
+ port access vlan 3568
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/6
+ port access vlan 3568
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/7
+ port access vlan 3568
+ stp edged-port enable 
+ 
+  ---- More ----[16D                [16D-
+
+filtering...
+#
+interface GigabitEthernet1/0/8
+ port access vlan 3568
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/9
+ port access vlan 3568 
+ 
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/10
+ port access vlan 3568
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/11
+ port access vlan 3568
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/12
+ port access vlan 3568
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/13
+ port access vlan 3568
+  ---- More ----[16D                [16D-
+
+filtering...
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/14
+ port access vlan 3568
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/15
+ port access vlan 3568
+ stp edged-port enable
+# 
+ 
+interface GigabitEthernet1/0/16
+ port access vlan 3568
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/17
+ port access vlan 3568
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/18
+ port access vlan 3568
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/19
+  ---- More ----[16D                [16D-
+
+filtering...
+ port access vlan 3568
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/20
+ port access vlan 3568 
+ 
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/21
+ port access vlan 3568
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/22
+ port access vlan 3568
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/23
+ port access vlan 3568
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/24
+ description uplink_to_sw90.19
+ port link-type hybrid
+ port hybrid vlan 669 900 3568 tagged
+  ---- More ----[16D                [16D-
+
+filtering...
+ port hybrid vlan 1 untagged
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/25
+ description **To_Sw_90.15**
+ port link-type hybrid
+ undo port hybrid vlan 1
+ port hybrid vlan 669 900 3568 tagged
+ port hybrid pvid vlan 669
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/26
+ port link-type hybrid
+ undo port hybrid vlan 1
+ port hybrid vlan 669 900 3568 tagged
+ port hybrid pvid vlan 669
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/27 
+ 
+ port link-type hybrid
+ undo port hybrid vlan 1
+ port hybrid vlan 669 900 3568 tagged
+ port hybrid pvid vlan 669
+  ---- More ----[16D                [16D-
+
+filtering...
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/28
+ port link-type hybrid
+ undo port hybrid vlan 1
+ port hybrid vlan 669 900 3568 tagged
+ port hybrid pvid vlan 669
+ stp edged-port enable 
+ 
+#
+ dhcp-snooping
+#
+ ip route-static 0.0.0.0 0.0.0.0 172.16.90.1 
+ 
+#
+ snmp-agent
+ snmp-agent local-engineid 800063A203B8AF671F3ECE
+ snmp-agent community read public
+ snmp-agent community write private
+ snmp-agent community read telecominvest
+ snmp-agent sys-info version all 
+ 
+#
+ header motd %
+  _____ _____ _     _____ ____ ___  __  __   ___ _   ___     _______ ____ _____
+ |_   _| ____| |   | ____/ ___/ _ \|  \/  | |_ _| \ | \ \   / | ____/ ___|_   _|
+  ---- More ----[16D                [16D-
+
+filtering...
+   | | |  _| | |   |  _|| |  | | | | |\/| |  | ||  \| |\ \ / /|  _| \___ \ | |
+   | | | |___| |___| |__| |__| |_| | |  | |  | || |\  | \ V / | |___ ___) || |
+   |_| |_____|_____|_____\____\___/|_|  |_| |___|_| \_|  \_/  |_____|____/ |_|
+|                                                                             |
+|                                                                             |
+|                                                                             | 
+ 
+
+  SHEBEKE ADMINLERINDEN BASQA BIRININ SWICHLERE QOUSHULMASI QETI QADAGANDIR.
+                    SHEBEKE ADMINSTRATORUNA MURACIET EDIN...
+|                                                                             |
+|                                                                             |
+%
+#
+user-interface aux 0
+ authentication-mode scheme
+user-interface vty 0 15
+ authentication-mode scheme 
+ 
+#
+return
+<IDF_Padval_Sw90.223>-
+    

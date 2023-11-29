@@ -1,0 +1,440 @@
+#
+ version 5.20.99, Release 1106
+#
+ sysname Xiyabani_Blok1
+#
+ domain default enable system
+#
+ ipv6
+#
+ telnet server enable
+#
+ password-recovery enable 
+ 
+#
+vlan 1
+#
+vlan 669
+#
+vlan 700
+ name Sherur_MGMT
+#
+vlan 3239
+#
+domain system
+  ---- More ----[16D                [16D-
+
+filtering...
+ access-limit disable
+ state active
+ idle-cut disable
+ self-service-url disable 
+ 
+#
+user-group system
+ group-attribute allow-guest
+#
+local-user admin
+ password cipher $c$3$gsa8dbSKwWFshiqtOhd5FTFGaXgRYDy6s88i
+ authorization-attribute level 3
+ service-type telnet terminal
+ service-type web 
+ 
+#
+ stp mode rstp
+ stp enable 
+ 
+#
+interface NULL0 
+ 
+#
+interface Vlan-interface1
+ shutdown
+#
+interface Vlan-interface700
+  ---- More ----[16D                [16D-
+
+filtering...
+ ip address 172.16.70.180 255.255.255.0 
+ 
+#
+interface Vlan-interface3239
+#
+interface GigabitEthernet1/0/1
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/2
+ port access vlan 3239
+ port auto-power-down 
+ 
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/3
+ port access vlan 3239
+ shutdown
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/4
+ port access vlan 3239
+ port auto-power-down
+  ---- More ----[16D                [16D-
+
+filtering...
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/5
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/6
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/7
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/8
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/9
+  ---- More ----[16D                [16D-
+
+filtering...
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/10
+ port access vlan 3239 
+ 
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/11
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/12
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/13
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+  ---- More ----[16D                [16D-
+
+filtering...
+#
+interface GigabitEthernet1/0/14
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/15
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/16
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/17
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/18
+ port access vlan 3239
+  ---- More ----[16D                [16D-
+
+filtering...
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/19
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/20
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/21
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/22
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable 
+ 
+#
+  ---- More ----[16D                [16D-
+
+filtering...
+interface GigabitEthernet1/0/23
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/24
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/25
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/26
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/27
+ port access vlan 3239
+ port auto-power-down
+  ---- More ----[16D                [16D-
+
+filtering...
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/28
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/29
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/30
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/31
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/32
+  ---- More ---- 
+ [16D                [16D-
+
+filtering...
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/33
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/34
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/35
+ description **To_Kodeks_2.242**
+ port access vlan 669
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/36
+ port access vlan 3239
+ port auto-power-down
+  ---- More ----[16D                [16D-
+
+filtering...
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/37
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/38
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/39
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/40 
+ 
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/41
+  ---- More ----[16D                [16D-
+
+filtering...
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/42
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/43
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/44
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/45
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable 
+ 
+  ---- More ----[16D                [16D-
+
+filtering...
+#
+interface GigabitEthernet1/0/46
+ description **Kodeks_1.17**
+ port access vlan 669
+ port auto-power-down
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/47
+ port access vlan 3239
+ port auto-power-down
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/48
+ description **To_Sw_70.13**
+ port link-type hybrid
+ port hybrid vlan 700 3239 tagged
+ port hybrid vlan 1 untagged
+ dhcp-snooping trust
+#
+interface GigabitEthernet1/0/49
+ port link-type hybrid
+ port hybrid vlan 669 700 3239 tagged
+ port hybrid vlan 1 untagged
+  ---- More ----[16D                [16D-
+
+filtering...
+ dhcp-snooping trust
+#
+interface GigabitEthernet1/0/50
+ description **From_70.1**
+ port link-type hybrid
+ port hybrid vlan 669 700 3239 tagged
+ port hybrid vlan 1 untagged
+ dhcp-snooping trust 
+ 
+#
+interface GigabitEthernet1/0/51
+ port link-type hybrid
+ port hybrid vlan 669 700 3239 tagged
+ port hybrid vlan 1 untagged
+ dhcp-snooping trust
+#
+interface GigabitEthernet1/0/52
+ description **To_Sw_70.127**
+ port link-type hybrid
+ port hybrid vlan 669 700 3239 tagged
+ port hybrid vlan 1 untagged
+ dhcp-snooping trust 
+ 
+#
+ dhcp-snooping
+  ---- More ----[16D                [16D-
+
+filtering...
+#
+ ip route-static 0.0.0.0 0.0.0.0 172.16.70.1 
+ 
+#
+ snmp-agent
+ snmp-agent local-engineid 800063A203B8AF6797DD5D
+ snmp-agent community read public
+ snmp-agent community write private
+ snmp-agent community read telecominvest
+ snmp-agent sys-info version all 
+ 
+#
+ header motd %
+
+  _____ _____ _     _____ ____ ___  __  __   ___ _   ___     _______ ____ _____
+ |_   _| ____| |   | ____/ ___/ _ \|  \/  | |_ _| \ | \ \   / | ____/ ___|_   _|
+   | | |  _| | |   |  _|| |  | | | | |\/| |  | ||  \| |\ \ / /|  _| \___ \ | |
+   | | | |___| |___| |__| |__| |_| | |  | |  | || |\  | \ V / | |___ ___) || |
+   |_| |_____|_____|_____\____\___/|_|  |_| |___|_| \_|  \_/  |_____|____/ |_|
+|                                                                             |
+|                                                                             |
+|                                                                             |
+
+  SHEBEKE ADMINLERINDEN BASQA BIRININ SWICHLERE QOUSHULMASI QETI QADAGANDIR.
+                    SHEBEKE ADMINSTRATORUNA MURACIET EDIN...
+  ---- More ----[16D                [16D-
+
+filtering...
+|                                                                             |
+|                                                                             |
+
+%
+#
+ ssh server enable
+#
+ load xml-configuration
+#
+user-interface aux 0
+ authentication-mode scheme
+user-interface vty 0 15
+ authentication-mode scheme 
+ 
+#
+return
+<Xiyabani_Blok1>-
+                ^
+ % Unrecognized command found at '^' position.
+<Xiyabani_Blok1>-
+   

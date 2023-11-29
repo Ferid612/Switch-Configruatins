@@ -1,0 +1,254 @@
+#
+ version 5.20 Release 1513P89
+#
+ sysname ZerdabiMain_sw_30.1
+#
+ domain default enable system
+#
+ telnet server enable
+#
+ ip ttl-expires enable
+#
+ password-recovery enable 
+ 
+#
+igmp-snooping
+#
+vlan 1
+#
+vlan 300
+ name MGMT_Zerdabi_89
+#
+vlan 493
+ name MGMT
+#
+  ---- More ----[16D                [16D-
+
+filtering...
+vlan 669
+ name VOICE
+#
+vlan 2409
+ name ACCESS 
+ 
+#
+radius scheme system
+#
+domain system
+ access-limit disable
+ state active
+ idle-cut disable
+ self-service-url disable 
+ 
+#
+user-group system 
+ 
+#
+local-user admin
+ password cipher $c$3$sEcfA4UXpR9qBfatAAGy3xsn/m3EHJH8DA+I
+ authorization-attribute level 3
+ service-type ssh telnet terminal
+ service-type web 
+ 
+#
+ stp enable 
+ 
+  ---- More ----[16D                [16D-
+
+filtering...
+#
+interface NULL0
+#
+interface Vlan-interface300
+ ipv6 address auto link-local
+ ip address 172.16.30.1 255.255.255.0
+# 
+ 
+interface Vlan-interface493
+ ip address 10.3.25.2 255.255.255.0
+#
+interface GigabitEthernet1/0/1
+ description **To_Sw_30.72**
+ port link-type hybrid
+ port hybrid vlan 300 493 669 2409 tagged
+ port hybrid vlan 1 untagged
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/2
+ description **To_Sw_30.73**
+ port link-type hybrid
+ port hybrid vlan 300 493 669 2409 tagged
+ port hybrid vlan 1 untagged
+ stp edged-port enable 
+ 
+  ---- More ----[16D                [16D-
+
+filtering...
+#
+interface GigabitEthernet1/0/3
+ description **To_Sw_30.74**
+ port link-type hybrid
+ port hybrid vlan 300 493 669 2409 tagged
+ port hybrid vlan 1 untagged
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/4
+ port link-type hybrid 
+ 
+ port hybrid vlan 300 669 2409 tagged
+ port hybrid vlan 1 untagged
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/5
+ port link-type hybrid
+ port hybrid vlan 300 493 669 2409 tagged
+ port hybrid vlan 1 untagged
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/6
+ port access vlan 2409
+ stp edged-port enable 
+ 
+  ---- More ----[16D                [16D-
+
+filtering...
+#
+interface GigabitEthernet1/0/7
+ port link-type hybrid
+ port hybrid vlan 300 493 669 2409 tagged
+ port hybrid vlan 1 untagged
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/8
+ port link-type hybrid
+ port hybrid vlan 300 669 2409 tagged
+ port hybrid vlan 1 untagged 
+ 
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/9
+ port access vlan 2409
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/10
+ port access vlan 2409
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/11 
+ 
+ port access vlan 2409
+  ---- More ----[16D                [16D-
+
+filtering...
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/12
+ port access vlan 2409
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/13
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/14
+ description **-**
+ port link-type hybrid
+ port hybrid vlan 300 493 669 2409 tagged
+ port hybrid vlan 1 untagged
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/15
+ description **From_DELTA**
+ port link-type hybrid 
+ 
+ port hybrid vlan 300 493 669 2409 tagged
+ port hybrid vlan 1 untagged
+ stp edged-port enable
+#
+  ---- More ----[16D                [16D-
+
+filtering...
+interface GigabitEthernet1/0/16
+ port link-type hybrid
+ port hybrid vlan 300 493 669 2409 tagged
+ port hybrid vlan 1 untagged
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/17
+ description **To_Sw_30.76**
+ port link-type hybrid
+ port hybrid vlan 300 493 669 2409 tagged
+ port hybrid vlan 1 untagged
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/18
+ description *to_sw_30.100**
+ port link-type hybrid
+ port hybrid vlan 300 493 669 2409 tagged
+ port hybrid vlan 1 untagged
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/19
+ port link-type hybrid
+ port hybrid vlan 300 493 669 2409 tagged
+  ---- More ---- 
+ [16D                [16D-
+
+filtering...
+ port hybrid vlan 1 untagged
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/20
+ port link-type hybrid
+ port hybrid vlan 300 493 669 2409 tagged
+ port hybrid vlan 1 untagged
+ stp edged-port enable 
+ 
+#
+ dhcp-snooping
+#
+ ip route-static 0.0.0.0 0.0.0.0 10.3.25.1 
+ 
+#
+ snmp-agent
+ snmp-agent local-engineid 8000002B0320FDF19B6DBA
+ snmp-agent community read public
+ snmp-agent community write private
+ snmp-agent community read telecominvest
+ snmp-agent sys-info version all 
+ 
+#
+ header motd %
+  _____ _____ _     _____ ____ ___  __  __   ___ _   ___     _______ ____ _____
+ |_   _| ____| |   | ____/ ___/ _ \|  \/  | |_ _| \ | \ \   / | ____/ ___|_   _|
+  ---- More ----[16D                [16D-
+
+filtering...
+   | | |  _| | |   |  _|| |  | | | | |\/| |  | ||  \| |\ \ / /|  _| \___ \ | |
+   | | | |___| |___| |__| |__| |_| | |  | |  | || |\  | \ V / | |___ ___) || |
+   |_| |_____|_____|_____\____\___/|_|  |_| |___|_| \_|  \_/  |_____|____/ |_|
+|                                                                             |
+|                                                                             |
+|                                                                             |
+
+  SHEBEKE ADMINLERINDEN BASQA BIRININ SWICHLERE QOUSHULMASI QETI QADAGANDIR.
+                    SHEBEKE ADMINSTRATORUNA MURACIET EDIN...
+|                                                                             |
+|                                                                             |
+% 
+ 
+#
+user-interface aux 0
+ authentication-mode scheme
+user-interface vty 0 15
+ authentication-mode scheme 
+ 
+#
+return 
+ 
+                     ^ 
+ 
+ % Unrecognized command found at '^' position.
+<ZerdabiMain_sw_30.1>-
+       

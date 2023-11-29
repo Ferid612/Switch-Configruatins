@@ -1,0 +1,226 @@
+#
+ version 5.20 Release 1513P89
+#
+ sysname XDMX_SW_41.1
+#
+ domain default enable system
+#
+ telnet server enable
+#
+ ip ttl-expires enable
+# 
+ 
+ password-recovery enable
+#
+vlan 1
+#
+vlan 214
+#
+vlan 410
+ name MGMT_XDMX
+#
+vlan 497
+ name MGMT
+#
+  ---- More ----[16D                [16D-
+
+filtering...
+vlan 1394
+ name Leyla_Xanim
+#
+vlan 3242
+ name *Yeni_ACCESS* 
+ 
+#
+domain system
+ access-limit disable
+ state active
+ idle-cut disable
+ self-service-url disable 
+ 
+#
+user-group system 
+ 
+#
+local-user admin
+ password cipher $c$3$bR3ogncJ1psCfhdKc+AEhwGLNwB2idH6gsPB
+ authorization-attribute level 3
+ service-type ssh telnet terminal
+ service-type web 
+ 
+#
+ stp enable 
+ 
+#
+interface NULL0
+  ---- More ----[16D                [16D- 
+ 
+
+filtering...
+#
+interface Vlan-interface410
+ ip address 172.16.41.1 255.255.255.0
+#
+interface Vlan-interface497
+ ip address 10.3.21.4 255.255.255.0
+#
+interface GigabitEthernet1/0/1
+ port access vlan 3242
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/2
+ port access vlan 3242
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/3
+ port access vlan 3242
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/4
+ port access vlan 3242 
+ 
+ stp edged-port enable
+#
+  ---- More ----[16D                [16D-
+
+filtering...
+interface GigabitEthernet1/0/5
+ port access vlan 3242
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/6
+ port access vlan 3242
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/7
+ port access vlan 3242
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/8
+ port access vlan 3242
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/9
+ port access vlan 3242
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/10
+ port access vlan 3242
+ stp edged-port enable
+  ---- More ---- 
+ [16D                [16D-
+
+filtering...
+#
+interface GigabitEthernet1/0/11
+ port access vlan 3242
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/12
+ port access vlan 3242
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/13
+ port access vlan 3242
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/14
+ port access vlan 3242
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/15
+ port access vlan 3242 
+ 
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/16
+ port access vlan 3242
+  ---- More ----[16D                [16D-
+
+filtering...
+ shutdown
+ stp edged-port enable 
+ 
+#
+interface GigabitEthernet1/0/17
+ port link-type hybrid
+ port hybrid vlan 214 410 497 1394 tagged
+ port hybrid vlan 1 untagged
+ stp edged-port enable
+#
+interface GigabitEthernet1/0/18
+ description **To_Sw_41.91**
+ port link-type hybrid
+ port hybrid vlan 214 410 497 1394 3242 tagged
+ port hybrid vlan 1 untagged
+ dhcp-snooping trust
+#
+interface GigabitEthernet1/0/19
+ description **To_Sw_41.92**
+ port link-type hybrid
+ port hybrid vlan 214 410 497 1394 3242 tagged
+ port hybrid vlan 1 untagged 
+ 
+ dhcp-snooping trust
+#
+  ---- More ----[16D                [16D-
+
+filtering...
+interface GigabitEthernet1/0/20
+ description **From_DELTA**
+ port link-type hybrid
+ port hybrid vlan 410 497 1394 3242 tagged
+ port hybrid vlan 1 untagged
+ dhcp-snooping trust 
+ 
+#
+ dhcp-snooping
+#
+ ip route-static 0.0.0.0 0.0.0.0 10.3.21.1 
+ 
+#
+ snmp-agent
+ snmp-agent local-engineid 8000002B0320FDF1CB9C43
+ snmp-agent community read public
+ snmp-agent community write private
+ snmp-agent community read telecominvest
+ snmp-agent sys-info version all 
+ 
+#
+ header motd %
+  _____ _____ _     _____ ____ ___  __  __   ___ _   ___     _______ ____ _____
+ |_   _| ____| |   | ____/ ___/ _ \|  \/  | |_ _| \ | \ \   / | ____/ ___|_   _|
+   | | |  _| | |   |  _|| |  | | | | |\/| |  | ||  \| |\ \ / /|  _| \___ \ | |
+   | | | |___| |___| |__| |__| |_| | |  | |  | || |\  | \ V / | |___ ___) || |
+  ---- More ----[16D                [16D-
+
+filtering...
+   |_| |_____|_____|_____\____\___/|_|  |_| |___|_| \_|  \_/  |_____|____/ |_|
+|                                                                             |
+|                                                                             |
+|                                                                             |
+
+  SHEBEKE ADMINLERINDEN BASQA BIRININ SWICHLERE QOUSHULMASI QETI QADAGANDIR. 
+ 
+                    SHEBEKE ADMINSTRATORUNA MURACIET EDIN...
+|                                                                             |
+|                                                                             |
+%
+#
+ ssh server enable
+#
+ undo arp check enable
+#
+user-interface aux 0
+ authentication-mode scheme
+user-interface vty 0 15
+ authentication-mode scheme 
+ 
+#
+return
+<XDMX_SW_41.1>-
+         
