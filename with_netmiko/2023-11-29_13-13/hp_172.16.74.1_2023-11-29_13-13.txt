@@ -1,0 +1,239 @@
+#
+ version 5.20 Release 1513P85
+#
+ sysname HP_Core_SW
+#
+ domain default enable system
+#
+ telnet server enable
+#
+ ip ttl-expires enable
+#
+ lldp enable
+ lldp compliance cdp 
+ 
+#
+ password-recovery enable
+#
+acl number 3001 name test
+ rule 1 deny tcp destination 85.132.78.50 0 destination-port eq telnet
+ rule 2 permit ip
+#
+vlan 1
+#
+vlan 2 to 4
+  ---- More ----[16D                [16D-
+
+filtering...
+#
+vlan 8
+ name Infosecurity
+#
+vlan 12
+#
+vlan 73
+#
+vlan 99
+# 
+ 
+vlan 100
+ name INTERNET2
+#
+vlan 199
+#
+vlan 302
+#
+vlan 333
+#
+vlan 415
+ name GammaNet_VOICE
+#
+vlan 480 to 481
+  ---- More ---- 
+ [16D                [16D-
+
+filtering...
+#
+vlan 483
+ name ipoe
+#
+vlan 484
+#
+vlan 491
+#
+vlan 493
+#
+vlan 496
+ description Managmet
+# 
+ 
+vlan 499
+#
+vlan 600
+#
+vlan 669
+#
+vlan 790
+#
+vlan 827
+#
+  ---- More ----[16D                [16D-
+
+filtering...
+vlan 986 to 987
+#
+vlan 1269
+#
+vlan 1273
+# 
+ 
+vlan 1328
+#
+vlan 2282
+#
+vlan 2701
+#
+vlan 2706
+#
+vlan 2710
+ name Skynet
+#
+vlan 2822
+#
+vlan 3002
+ name company
+#
+vlan 3003
+  ---- More ----[16D                [16D- 
+ 
+
+filtering...
+ description YeniPPPoE
+ name YeniPPPoE
+#
+vlan 3143
+ name MGMT
+#
+vlan 3252
+#
+vlan 3444
+ name Test
+#
+vlan 3607 
+ 
+#
+radius scheme system
+#
+domain system
+ access-limit disable
+ state active
+ idle-cut disable
+ self-service-url disable 
+ 
+#
+ public-key peer 172.16.74.1
+  public-key-code begin
+  ---- More ----[16D                [16D-
+
+filtering...
+   30819F300D06092A864886F70D010101050003818D0030818902818100BB974CA3F7D1DFEC
+   956636914BDEAD89F137543B68053502BEF0104A7A37306C726817F46F7CD0DAD468D790DE
+   ABD5C5F77ED2371A412FF4250C1F791870094CBE74B2681022D24B3FA1FC65689B91D2A10D
+   7808FEE7A899346AAB6065199DFC083BB8A48D5FC52C44B71EC24CAC9C90838F9D55262E4F
+   17086990E789F68D310203010001
+  public-key-code end
+ peer-public-key end
+#
+ public-key peer 192.168.1.1
+  public-key-code begin
+   30819F300D06092A864886F70D010101050003818D0030818902818100BB974CA3F7D1DFEC
+   956636914BDEAD89F137543B68053502BEF0104A7A37306C726817F46F7CD0DAD468D790DE
+   ABD5C5F77ED2371A412FF4250C1F791870094CBE74B2681022D24B3FA1FC65689B91D2A10D 
+ 
+   7808FEE7A899346AAB6065199DFC083BB8A48D5FC52C44B71EC24CAC9C90838F9D55262E4F
+   17086990E789F68D310203010001
+  public-key-code end
+ peer-public-key end
+#
+ public-key peer 172.16.73.1
+  public-key-code begin
+   30819F300D06092A864886F70D010101050003818D0030818902818100BB974CA3F7D1DFEC
+   956636914BDEAD89F137543B68053502BEF0104A7A37306C726817F46F7CD0DAD468D790DE
+   ABD5C5F77ED2371A412FF4250C1F791870094CBE74B2681022D24B3FA1FC65689B91D2A10D
+  ---- More ----[16D                [16D-
+
+filtering...
+   7808FEE7A899346AAB6065199DFC083BB8A48D5FC52C44B71EC24CAC9C90838F9D55262E4F
+   17086990E789F68D310203010001
+  public-key-code end
+ peer-public-key end
+#
+ public-key peer 192.168.1.5
+  public-key-code begin
+   308201B63082012B06072A8648CE3804013082011E02818100BB2EC0C8C7E6E8168E56CEA6
+   143DD9AE073090C8D762007F780E8A0CC1A0DB76520221475BE7B4E62C564AB4694E82CF3E
+   07EF4475C68CDADA8DA0836B3405A6FDB72596ED7FB988161A7EAC0FC9E58C348BFD3472FC
+   D1831A59CFBE490B35EE2711D602D1DA6D725397B25D0548002F0730B5B7987995CAE49033
+   36D0DDA54B021500E6D8387EC199F601C2484911D0EE666ED57856B302818064D5E484F6CC 
+ 
+   4D34FC8AD9FD359A947B06B9B134C87FCB099ED91C1220D12C945DDCDA075806DE3E13588C
+   E1B003CD6498B387A862FE274323E11032F1BA52A257B1D036FDF830D34CEA5E2D61977A3E
+   7502FB566C23D4DC9F9F1936710BF8F11276E438BCF82B57378CE1E5036FAD6B219497D167
+   285BA63BA1C9F70515E958038184000281805CA358918C9E62ED0E3D3DBDEDBE4408786A67
+   163BB3728979A5A11E41D09D0C73FEB06C317FF92560FF8640AB34AEA6A8F883D15E48CD2E
+   9A9927B1AFF8131C0FC2A1F72939CC82465E104E12D7C69B0B5707FC0305F994C282DD59EA
+   6419012FE4151C0F47DC164BDC1110AFFF0F08747E75B2EAFF3A1938ED3F135AE1B48D
+  public-key-code end
+ peer-public-key end
+#
+ public-key peer 172.16.74.3
+  ---- More ----[16D                [16D-
+
+filtering...
+  public-key-code begin
+   30819F300D06092A864886F70D010101050003818D0030818902818100AD01662406054FDB
+   E6302D758A5228D014C60074F97C757D46B143C5FF85A4B81500D52EE94447E915FA91274E
+   D242EC50D9C322463E53E1B28D27997086A482736DFB4965347C1909DC06CBF0F153A89E41
+   6CD9597B98F0F2E968D94E04B9542E294B615FA2635476B11F3BCEAE8DEBBBD44A7370C36F
+   DA78BEF6594C7BD92B0203010001
+  public-key-code end
+ peer-public-key end 
+ 
+#
+user-group system
+#
+local-user Test
+ password cipher $c$3$PFCg6vmkxfk+RubQRKW92Ehw4E0QYUfBxORhR/ytew==
+ authorization-attribute level 3
+ service-type ssh telnet terminal
+ service-type web
+local-user admin
+ password cipher $c$3$LIJq9vGeAcI5tjkYyOkL68rsiTif1/ml+Pqoi5FJag==
+ authorization-attribute level 3
+ service-type ssh telnet terminal
+ service-type web 
+ 
+#
+ stp enable 
+ 
+  ---- More ----[16D                [16D-
+
+filtering...
+# 
+ 
+interface NULL0
+#
+interface Vlan-interface73
+ ip address 172.16.73.2 255.255.255.0
+#
+interface Vlan-interface99 
+ 
+ description <<Internet>>
+ ip address 85.132.91.1 255.255.255.248
+#
+interface Vlan-interface100
+ description <<Internet2>>
+ ip address 85.132.81.73 255.255.255.248
+#
+interface Vlan-interface496
+ ip address 10.3.22.7 255.255.255.0
