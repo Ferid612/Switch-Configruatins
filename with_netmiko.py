@@ -35,16 +35,19 @@ def connect_to_switch(ip_address, username = "admin", password = "!n\/esT@"):
 
 
 def login_to_switch(connection):
-    output = send_command_to_switch(connection, command = "_cmdline-mode on",sleep_time=0)
-    if "Invalid input detected at '^' marker." in output:
+    output = send_command_to_switch(connection, command = "_cmdline-mode on")
+    if "Invalid" in output:
         raise ValueError("Wrong model choose")
     
     output = send_command_to_switch(connection, command = "y",sleep_time=0)
+    if "Invalid" in output:
+        raise ValueError("Wrong model choose")
+    
     output = send_command_to_switch(connection, command = "512900",sleep_time=0)
     
         
     if "Error: Invalid password." in output:
-        send_command_to_switch(connection, command = "_cmdline-mode on",sleep_time=0)
+        send_command_to_switch(connection, command = "_cmdline-mode on")
         send_command_to_switch(connection, command = "y", sleep_time=0)
         send_command_to_switch(connection, command = "Jinhua1920unauthorized",sleep_time=0)
         
@@ -58,7 +61,8 @@ def send_command_to_switch(connection, command = None, sleep_time = 1 ):
         
     output = connection.send_command(command, expect_string='\n')
     time.sleep(sleep_time)
-    print(output)
+    print("output:",output)
+    print("output finished")
     return output
         
         
@@ -144,12 +148,11 @@ def backup_switches(ip_addresses):
 
 
 
-# cisco_ip_addresses = ["172.16.73.1","172.16.70.1","172.16.70.222","172.16.70.14","172.16.77.1","172.16.77.12","172.16.47.1","172.16.78.1","172.16.92.1","172.16.91.1","172.16.97.1","172.16.93.1","172.16.93.210","172.16.99.1","172.16.99.100","172.16.80.1","172.16.32.1","172.16.55.1","172.16.90.1","172.16.90.70","172.16.90.150","172.16.90.217","172.16.90.67","172.16.90.36","172.16.90.69","172.16.31.1","172.16.60.1","172.16.60.135","172.16.60.30","172.16.60.160","172.16.72.1","172.16.75.1","172.16.73.1","172.16.46.1"]
-# hp_ip_addresses = ["172.16.81.1","172.16.82.1","172.16.44.1","172.16.42.1","172.16.41.1","172.16.43.1","172.16.40.1","172.16.70.116","172.16.70.180","172.16.70.240","172.16.30.1","172.16.30.76","172.16.30.100","172.16.90.223","172.16.96.1","172.16.95.1","172.16.54.1","172.16.94.1","172.16.53.1","172.16.53.202","172.16.71.1","172.16.50.1","172.16.52.1","172.16.51.1","172.16.74.1","10.3.22.6 "]
+cisco_ip_addresses = ["172.16.73.1","172.16.70.1","172.16.70.222","172.16.70.14","172.16.77.1","172.16.77.12","172.16.47.1","172.16.78.1","172.16.92.1","172.16.91.1","172.16.97.1","172.16.93.1","172.16.93.210","172.16.99.1","172.16.99.100","172.16.80.1","172.16.32.1","172.16.55.1","172.16.90.1","172.16.90.70","172.16.90.150","172.16.90.217","172.16.90.67","172.16.90.36","172.16.90.69","172.16.31.1","172.16.60.1","172.16.60.135","172.16.60.30","172.16.60.160","172.16.72.1","172.16.75.1","172.16.73.1","172.16.46.1"]
+hp_ip_addresses = ["172.16.81.1","172.16.82.1","172.16.44.1","172.16.42.1","172.16.41.1","172.16.43.1","172.16.40.1","172.16.70.116","172.16.70.180","172.16.70.240","172.16.30.1","172.16.30.76","172.16.30.100","172.16.90.223","172.16.96.1","172.16.95.1","172.16.54.1","172.16.94.1","172.16.53.1","172.16.53.202","172.16.71.1","172.16.50.1","172.16.52.1","172.16.51.1","172.16.74.1","10.3.22.6 "]
 
    
 # hp_ip_addresses = ["172.16.81.1"]
-cisco_ip_addresses = ["172.16.73.1","172.16.81.1"]
-
-# backup_switches(hp_ip_addresses, model="hp")
-backup_switches(cisco_ip_addresses)
+ip_addresses = cisco_ip_addresses + hp_ip_addresses
+# ip_addresses = ["172.16.70.14","172.16.77.1"]
+backup_switches(ip_addresses)
